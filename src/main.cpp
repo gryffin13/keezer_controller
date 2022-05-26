@@ -1,12 +1,17 @@
 #include <Arduino.h>
-// #include <OneWire.h>
-// #include <LiquidCrystal.h>
+#include <OneWire.h>
+#include <LiquidCrystal.h>
+#include <FastLED.h>
 int Relay = 12; 
 float highTemp = 50;
 float lowTemp = 45;
 const int selectButtonPin = 2;
 const int upButtonPin = 3;
 const int downButtonPin = 4; 
+
+#define NUM_LEDS 1
+#define DATA_PIN 13
+CRGB leds[NUM_LEDS];
 
 volatile int selectButtonState = 0;         // variable for reading the pushbutton status
 volatile int downButtonState = 0;  
@@ -108,6 +113,7 @@ lcd.clear();
 //lcd.print("  Current Temp:");
 Serial.begin(9600);
 Serial.println("new function start");
+FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed
 
 }
 //----------------------------
